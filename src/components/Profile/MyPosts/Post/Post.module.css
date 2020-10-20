@@ -1,6 +1,14 @@
 .item {
   font-weight: bold;
+  margin-bottom: 10px;
 }
+
+.likes{
+  color:darkgreen;
+  font-size: x-small;
+  font-weight: normal;
+}
+
 .item img {
   width: 30px;
   height: 30px;

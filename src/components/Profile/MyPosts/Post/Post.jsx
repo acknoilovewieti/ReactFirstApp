@@ -6,8 +6,12 @@ const Post = (props) => {
   return (
     <div className={s.item}>
       <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS4XSv8zvv1XvIvvz8PFg8hRwUTQJjbis-CJg&usqp=CAU' alt='' width='10'></img>
+     
       {props.message}
-      <div>Likes: {props.likesCount}</div>
+     
+      <div className={s.likes}>
+        Likes: {props.likesCount}
+        </div>
     </div>
   );
 }
