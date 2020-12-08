@@ -10,7 +10,7 @@ debugger;
 
   let addPost = () => {
     let text1 = newPostElement.current.value;
-    alert(text1);
+    props.addPost(text1);
   }
 
   return (
