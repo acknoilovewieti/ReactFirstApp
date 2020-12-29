@@ -1,4 +1,5 @@
-let state = {
+let store = {
+  _state: {
     profilePage: {
         posts: [
             {id: 1, message: 'Hi, how are you?', likesCount: 23},
@@ -26,28 +27,33 @@ let state = {
                 {id: 1, message: "Yo"}
             ]
     }
+  },
+  getState(){
+    return this._state;
+  },
+
+  _callSubscriber() {
+    console.log('State changed');
+  },
+  addPost() {
+    let newPost = {
+      id: 5,
+      message: this._state.profilePage.newPostText,
+      likesCount: 0
+    };
+    this._state.profilePage.posts.push(newPost);
+    this._state.profilePage.newPostText = '';
+    this._callSubscriber();
+  },
+  updateNewPostText(newText) {
+    this._state.profilePage.newPostText = newText;
+    this._callSubscriber();
+  },
+  subscribe(observer) {
+     this._callSubscriber = observer;
+  }
 }
 
-let renderEntireTree = () => {};
-
-export const addPost = () => {
-  let newPost = {
-    id: 5,
-    message: state.profilePage.newPostText,
-    likesCount: 0
-  };
-  state.profilePage.posts.push(newPost);
-  state.profilePage.newPostText = '';
-  renderEntireTree();
-}
-
-export const updateNewPostText = (newText) => {
-  state.profilePage.newPostText = newText;
-  renderEntireTree();
-}
-
-export const subscribe = (observer) => {
-   renderEntireTree = observer;
-}
-
-export default state;
+export default store;
+window.store = store;
+// store - OOP
