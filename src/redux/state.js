@@ -1,6 +1,6 @@
-const ADD_POST = 'ADD_POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT';
-
+import { dialogsReducer } from "./dialogs_reducer";
+import { profileReducer } from "./profile_reducer";
+import { sidebarReducer } from "./sidebar_reducer";
 
 let store = {
   _state: 
@@ -14,7 +14,6 @@ let store = {
           ],
           newPostText: 'reakt-first-demo'
         },
-
     dialogsPage: {
         dialogs: [
             {id: 1, name: "Dimych"},
@@ -31,7 +30,8 @@ let store = {
                 {id: 1, message: "Yo"},
                 {id: 1, message: "Yo"}
             ]
-    }
+    },
+    sidebar: {}
   },
   _callSubscriber() 
   {
@@ -47,32 +47,17 @@ let store = {
   {
     this._callSubscriber = observer;
   },
-
   
 
-  dispatch(action) { // {type: 'ADD_POST'}
-    if (action.type === ADD_POST) {
-      let newPost = {
-        id: 5,
-        message: this._state.profilePage.newPostText,
-        likesCount: 0
-      };
-      this._state.profilePage.posts.push(newPost);
-      this._state.profilePage.newPostText = '';
-      this._callSubscriber();
-    }
-    else if (action.type === UPDATE_NEW_POST_TEXT)
-    {
-      this._state.profilePage.newPostText = action.newText;
-      this._callSubscriber();
-    } 
+  dispatch(action) 
+  { 
+    this._state.profilePage = profileReducer(this._state.profilePage, action);
+    this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
+    this._state.sidebar = sidebarReducer(this._state.sidebar, action);
+  
+    this._callSubscriber();
   }
 }
-
-export let addPostActionCreator = () => ({type: ADD_POST});
-
-export let updateNewPostTextActionCreator = (text) => ({type: UPDATE_NEW_POST_TEXT, newText: text});
-
 
 export default store;
 window.store = store;
