@@ -1,6 +1,6 @@
-import { dialogsReducer } from "./dialogs_reducer";
-import { profileReducer } from "./profile_reducer";
-import { sidebarReducer } from "./sidebar_reducer";
+import dialogsReducer from "./dialogs_reducer";
+import profileReducer from "./profile_reducer";
+import sidebarReducer from "./sidebar_reducer";
 
 let store = {
   _state: 
@@ -31,7 +31,7 @@ let store = {
                 {id: 1, message: "Yo"}
             ]
     },
-    sidebar: {}
+    sideBar: {}
   },
   _callSubscriber() 
   {
